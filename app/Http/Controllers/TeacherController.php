@@ -37,10 +37,6 @@ class TeacherController extends Controller
 
        Teacher::create($request->all());
 
-//        $data = Teacher
-//            ::join('departments', 'departments.dept_id', '=', 'teachers.department')
-//            ->first();
-
         return redirect()->route('teacher.index')
             ->with('success','New Record Inserted successfully.');
     }

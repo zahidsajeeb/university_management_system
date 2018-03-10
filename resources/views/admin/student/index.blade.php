@@ -20,21 +20,43 @@
                                 <tr>
                                     <th>Sl No</th>
                                     <th>Name</th>
+                                    <th>Mobile</th>
+                                    <th>E-mail</th>
                                     <th>Department</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
+                                @foreach($users as $data)
                                 <tr>
-                                    <td>01</td>
-                                    <td>Mohammad Zahidul Islam</td>
-                                    <td>Computer Engineering</td>
+                                    <td>{{++$i}}</td>
+                                    <td>{{$data->student_name}}</td>
+                                    <td>{{$data->mobile}}</td>
+                                    <td>{{$data->email}}</td>
+                                    <td>{{$data->dept_name}}</td>
                                     <td>
-                                        <button class="btn btn-info"><i class="fa fa-folder-open"></i> Show</button>
-                                        <button class="btn btn-primary"><i class="fa fa-edit"></i> Edit</button>
-                                        <button class="btn btn-danger"><i class="fa fa-trash"></i> Delete</button>
+                                        <div class="col-xs-2">
+                                            <div class="bs-component1">
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Action
+                                                        <span class="caret ml5"></span>
+                                                    </button>
+                                                    <ul class="dropdown-menu" role="menu">
+                                                        <li><a href="#"><i class="fa fa-folder-open"></i> Info Show</a></li>
+                                                        {{--<li class="divider"></li>--}}
+                                                        <li><a href="#"><i class="fa fa-edit"></i> Edit</a></li>
+                                                        {{--<li class="divider"></li>--}}
+                                                        <li><a href="#"><i class="fa fa-trash"></i> Delete</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {{--<button class="btn btn-info btn-xs"><i class="fa fa-folder-open"></i> Show</button>--}}
+                                        {{--<button class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Edit</button>--}}
+                                        {{--<button class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Delete</button>--}}
                                     </td>
                                 </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

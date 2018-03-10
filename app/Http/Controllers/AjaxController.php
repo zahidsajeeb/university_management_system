@@ -29,9 +29,7 @@ class AjaxController extends Controller
         $email = DB::table("students")->select('email')
             ->where("email",$request->email)
             ->count();
-
         return response()->json($email);
-
     }
 
 }

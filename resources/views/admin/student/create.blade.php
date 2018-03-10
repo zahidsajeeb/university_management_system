@@ -4,9 +4,20 @@
         <div class="tray tray-center">
             <div class="admin-form theme-primary mw1000 center-block" style="padding-bottom: 175px;">
                 <div class="panel heading-border">
-                    <form method="post" action="/" id="admin-form">
-                        <div class="panel-body bg-light">
+                    @if (count($errors) > 0)
+                        <div class="alert alert-danger">
+                            <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
 
+                        <form method="post" action="{{route('student.store')}}" id="admin-form" enctype="multipart/form-data">
+                        @csrf
+                        <div class="panel-body bg-light">
                             <div class="section-divider mt20 mb40">
                                 <span> General Information </span>
                             </div>
@@ -15,7 +26,7 @@
                             <div class="section row" id="spy1">
                                 <div class="col-md-12">
                                     <label for="firstname" class="field prepend-icon">
-                                        <input type="text" name="firstname" id="firstname" class="gui-input" placeholder="Student Name">
+                                        <input type="text" name="student_name" id="firstname" class="gui-input" placeholder="Student Name">
                                         <label for="firstname" class="field-icon">
                                             <i class="fa fa-user"></i>
                                         </label>
@@ -23,11 +34,10 @@
                                 </div>
                             </div>
 
-
                             <div class="section row" id="spy1">
                                 <div class="col-md-6">
                                     <label for="firstname" class="field prepend-icon">
-                                        <input type="text" name="firstname" id="firstname" class="gui-input" placeholder="Father's Name">
+                                        <input type="text" name="father_name" id="firstname" class="gui-input" placeholder="Father's Name">
                                         <label for="firstname" class="field-icon">
                                             <i class="fa fa-user"></i>
                                         </label>
@@ -36,7 +46,7 @@
 
                                 <div class="col-md-6">
                                     <label for="lastname" class="field prepend-icon">
-                                        <input type="text" name="lastname" id="lastname" class="gui-input" placeholder="Mother's Name...">
+                                        <input type="text" name="mother_name" id="lastname" class="gui-input" placeholder="Mother's Name...">
                                         <label for="lastname" class="field-icon">
                                             <i class="fa fa-user"></i>
                                         </label>
@@ -47,7 +57,7 @@
                             <div class="section row" id="spy1">
                                 <div class="col-md-4">
                                     <label for="firstname" class="field prepend-icon">
-                                        <input type="text" name="firstname" id="firstname" class="gui-input" placeholder="Nationality">
+                                        <input type="text" name="nationality" id="firstname" class="gui-input" placeholder="Nationality">
                                         <label for="firstname" class="field-icon">
                                             <i class="fa fa-user"></i>
                                         </label>
@@ -56,7 +66,7 @@
 
                                 <div class="col-md-4">
                                     <label for="lastname" class="field prepend-icon">
-                                        <input type="text" name="lastname" id="username" class="gui-input" placeholder="Mobile Number">
+                                        <input type="text" name="mobile" id="username" class="gui-input" placeholder="Mobile Number">
                                         <label for="lastname" class="field-icon">
                                             <i class="fa fa-user"></i>
                                         </label>
@@ -66,7 +76,7 @@
 
                                 <div class="col-md-4">
                                     <label for="lastname" class="field prepend-icon">
-                                        <input type="text" name="lastname" id="email" class="gui-input" placeholder="E-mail">
+                                        <input type="text" name="email" id="email" class="gui-input" placeholder="E-mail">
                                         <label for="lastname" class="field-icon">
                                             <i class="fa fa-user"></i>
                                         </label>
@@ -75,12 +85,25 @@
                                 </div>
                             </div>
 
-                            <div class="section" id="spy2">
-                                <label for="file1" class="field file">
-                                    <span class="button btn-primary"> Choose File </span>
-                                    <input type="file" class="gui-file" name="upload1" id="file1" onChange="document.getElementById('uploader1').value = this.value;">
-                                    <input type="text" class="gui-input" id="uploader1" placeholder="Select Student Image" readonly>
-                                </label>
+                            <div class="section row" id="spy2">
+                                <div class="col-md-6">
+                                    <label for="file1" class="field file">
+                                        <span class="button btn-primary"> Choose File </span>
+                                        <input type="file" class="gui-file" name="student_photo" id="file1" onChange="document.getElementById('uploader1').value = this.value;">
+                                        <input type="text" class="gui-input" id="uploader1" placeholder="Select Student Image" readonly>
+                                    </label>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="datepicker1" class="field prepend-icon">
+                                        <input type="text" id="datepicker1" name="dob" class="gui-input" placeholder="Date Of Birth">
+                                        <label class="field-icon">
+                                            <i class="fa fa-calendar-o"></i>
+                                        </label>
+                                    </label>
+                                </div>
+
+
                             </div>
 
                             <br>
@@ -92,7 +115,7 @@
                             <div class="section row" id="spy1">
                                 <div class="col-md-12">
                                     <label for="firstname" class="field prepend-icon">
-                                        <input type="text" name="firstname" id="firstname" class="gui-input" placeholder="School Name">
+                                        <input type="text" name="school_name" id="firstname" class="gui-input" placeholder="School Name">
                                         <label for="firstname" class="field-icon">
                                             <i class="fa fa-user"></i>
                                         </label>
@@ -103,7 +126,7 @@
                             <div class="section row" id="spy1">
                                 <div class="col-md-4">
                                     <label for="firstname" class="field select">
-                                        <select id="language" name="language">
+                                        <select id="language" name="ssc_dept">
                                             <option value="">Select Department...</option>
                                             <option value="EN">Science</option>
                                             <option value="FR">Arts</option>
@@ -115,7 +138,7 @@
 
                                 <div class="col-md-4">
                                     <label for="lastname" class="field prepend-icon">
-                                        <input type="text" name="lastname" id="lastname" class="gui-input" placeholder="GPA">
+                                        <input type="text" name="ssc_gpa" id="lastname" class="gui-input" placeholder="GPA">
                                         <label for="lastname" class="field-icon">
                                             <i class="fa fa-user"></i>
                                         </label>
@@ -124,7 +147,7 @@
 
                                 <div class="col-md-4">
                                     <label for="lastname" class="field prepend-icon">
-                                        <input type="text" name="lastname" id="lastname" class="gui-input" placeholder="Role No">
+                                        <input type="text" name="ssc_role" id="lastname" class="gui-input" placeholder="Role No">
                                         <label for="lastname" class="field-icon">
                                             <i class="fa fa-user"></i>
                                         </label>
@@ -135,7 +158,7 @@
                             <div class="section row" id="spy1">
                                 <div class="col-md-12">
                                     <label for="firstname" class="field prepend-icon">
-                                        <input type="text" name="firstname" id="firstname" class="gui-input" placeholder="College Name">
+                                        <input type="text" name="college_name" id="firstname" class="gui-input" placeholder="College Name">
                                         <label for="firstname" class="field-icon">
                                             <i class="fa fa-user"></i>
                                         </label>
@@ -146,7 +169,7 @@
                             <div class="section row" id="spy1">
                                 <div class="col-md-4">
                                     <label for="firstname" class="field select">
-                                        <select id="language" name="language">
+                                        <select id="language" name="hsc_dept">
                                             <option value="">Select Department...</option>
                                             <option value="EN">Science</option>
                                             <option value="FR">Arts</option>
@@ -158,7 +181,7 @@
 
                                 <div class="col-md-4">
                                     <label for="lastname" class="field prepend-icon">
-                                        <input type="text" name="lastname" id="lastname" class="gui-input" placeholder="GPA">
+                                        <input type="text" name="hsc_gpa" id="lastname" class="gui-input" placeholder="GPA">
                                         <label for="lastname" class="field-icon">
                                             <i class="fa fa-user"></i>
                                         </label>
@@ -167,7 +190,7 @@
 
                                 <div class="col-md-4">
                                     <label for="lastname" class="field prepend-icon">
-                                        <input type="text" name="lastname" id="lastname" class="gui-input" placeholder="Role No">
+                                        <input type="text" name="hsc_role" id="lastname" class="gui-input" placeholder="Role No">
                                         <label for="lastname" class="field-icon">
                                             <i class="fa fa-user"></i>
                                         </label>
@@ -182,7 +205,7 @@
                             <div class="section row" id="spy1">
                                 <div class="col-md-4">
                                     <label for="lastname" class="field prepend-icon">
-                                        <input type="text" name="lastname" id="lastname" class="gui-input" placeholder="ID Number">
+                                        <input type="text" name="uni_id" id="lastname" class="gui-input" placeholder="ID Number">
                                         <label for="lastname" class="field-icon">
                                             <i class="fa fa-user"></i>
                                         </label>
@@ -190,8 +213,8 @@
                                 </div>
 
                                 <div class="col-md-4">
-                                    <label for="firstname" class="field select">
-                                        <select id="country" name="department">
+                                    <label for="firstname" class="field  select">
+                                        <select id="country" name="uni_dept">
                                             <option value="">---Select Department---</option>
                                             @foreach($datas as $data)
                                                 <option value="{{ $data->dept_id }}">{{ $data->dept_name }}</option>
@@ -203,38 +226,25 @@
 
                                 <div class="col-md-4">
                                     <label for="firstname" class="field select">
-                                        <select name="state" id="state">
+                                        <select name="advisor" id="state">
                                         </select>
                                         <i class="arrow double"></i>
                                     </label>
                                 </div>
-
                             </div>
-
-
-
                         </div>
-
                         <!-- end .form-body section -->
                         <div class="panel-footer text-right">
                             <button type="submit" class="button btn-primary"><i class="fa fa-check"></i> Submit </button>
                             <button type="reset" class="button"> Cancel </button>
                         </div>
-                        <!-- end .form-footer section -->
-                    </form>
+                        </form>
+
                 </div>
+
             </div>
             <!-- end: .admin-form -->
+
         </div>
     </section>
-    {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>--}}
-    {{--<script type="text/javascript">--}}
-        {{----}}
-    {{--</script>--}}
-
-
-
-
-
 @endsection
-

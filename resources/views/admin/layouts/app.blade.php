@@ -397,6 +397,8 @@
 <!-- Sparklines Plugin -->
 <script src="{{url('vendor/plugins/sparkline/jquery.sparkline.min.js')}}"></script>
 
+<script src="{{url('assets/admin-tools/admin-forms/js/jquery-ui-datepicker.min.js')}}"></script>
+
 <!-- Simple Circles Plugin -->
 <script src="{{url('vendor/plugins/circles/circles.js')}}"></script>
 
@@ -413,60 +415,31 @@
 <script src="{{url('assets/js/demo/widgets.js')}}"></script>
 <script type="text/javascript">
     jQuery(document).ready(function() {
-
         "use strict";
-
-        // Init Theme Core
         Core.init();
-
-        // Init Demo JS
         Demo.init();
-
-        // Init Widget Demo JS
-        // demoHighCharts.init();
-
-        // Because we are using Admin Panels we use the OnFinish
-        // callback to activate the demoWidgets. It's smoother if
-        // we let the panels be moved and organized before
-        // filling them with content from various plugins
-
-        // Init plugins used on this page
-        // HighCharts, JvectorMap, Admin Panels
-
-        // Init Admin Panels on widgets inside the ".admin-panels" container
         $('.admin-panels').adminpanel({
             grid: '.admin-grid',
             draggable: true,
             preserveGrid: true,
             mobile: false,
             onStart: function() {
-                // Do something before AdminPanels runs
             },
             onFinish: function() {
                 $('.admin-panels').addClass('animated fadeIn').removeClass('fade-onload');
-
-                // Init the rest of the plugins now that the panels
-                // have had a chance to be moved and organized.
-                // It's less taxing to organize empty panels
                 demoHighCharts.init();
-                runVectorMaps(); // function below
+                runVectorMaps();
             },
             onSave: function() {
                 $(window).trigger('resize');
             }
         });
 
-        // Widget VectorMap
         function runVectorMaps() {
-
-            // Jvector Map Plugin
             var runJvectorMap = function() {
-                // Data set
                 var mapData = [900, 700, 350, 500];
-                // Init Jvector Map
                 $('#WidgetMap').vectorMap({
                     map: 'us_lcc_en',
-                    //regionsSelectable: true,
                     backgroundColor: 'transparent',
                     series: {
                         markers: [{
@@ -515,8 +488,6 @@
                         selectedHover: {}
                     },
                 });
-                // Manual code to alter the Vector map plugin to
-                // allow for individual coloring of countries
                 var states = ['US-CA', 'US-TX', 'US-MO',
                     'US-NY'
                 ];
@@ -563,6 +534,20 @@
             }
         });
 
+        $("#datepicker1").datepicker({
+            prevText: '<i class="fa fa-chevron-left"></i>',
+            nextText: '<i class="fa fa-chevron-right"></i>',
+            showButtonPanel: false,
+            beforeShow: function(input, inst) {
+                var newclass = 'admin-form';
+                var themeClass = $(this).parents('.admin-form').attr('class');
+                var smartpikr = inst.dpDiv.parent();
+                if (!smartpikr.hasClass(themeClass)) {
+                    inst.dpDiv.wrap('<div class="' + themeClass + '"></div>');
+                }
+            }
+        });
+
         $('#country').change(function(){
             var countryID = $(this).val();
             if(countryID){
@@ -572,7 +557,7 @@
                     success:function(res){
                         if(res){
                             $("#state").empty();
-                            $("#state").append('<option>Select Options....</option>');
+                            $("#state").append('<option>Select Advisor....</option>');
                             $.each(res,function(key,value){
                                 $("#state").append('<option value="'+key+'">'+value+'</option>');
                             });
