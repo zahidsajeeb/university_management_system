@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 
 class StudentController extends Controller
 {
-
     public function index()
     {
         $users = DB::table('students')
@@ -19,13 +18,11 @@ class StudentController extends Controller
         return view('admin.student.index',compact('users'))->with('i');
     }
 
-
     public function create()
     {
         $data= Department::all();
        return view('admin.student.create')->with('datas',$data);
     }
-
 
     public function store(Request $request)
     {
@@ -85,16 +82,17 @@ class StudentController extends Controller
         return redirect()->route('student.index')->with('success','New Student Record Inserted successfully.');
     }
 
-
     public function show($id)
     {
-        //
+        $data = Student::find($id);
+        return view('admin.student.show')->with('data', $data);
     }
 
 
     public function edit($id)
     {
-        //
+        $data = Student::find($id);
+        return view('admin.student.edit')->with('data', $data);
     }
 
 

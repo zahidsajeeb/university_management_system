@@ -377,6 +377,8 @@
 <!-- jQuery -->
 <script src="{{url('vendor/jquery/jquery-1.11.1.min.js')}}"></script>
 <script src="{{url('vendor/jquery/jquery_ui/jquery-ui.min.js')}}"></script>
+<script src="{{url('assets/admin-tools/admin-forms/js/jquery.validate.min.js')}}"></script>
+<script src="{{url('assets/admin-tools/admin-forms/js/additional-methods.min.js')}}"></script>
 
 <script src="{{url('vendor/plugins/datatables/media/js/jquery.dataTables.js')}}"></script>
 
@@ -604,6 +606,7 @@
                 Result.html('');
             }
         });
+
         $("#username").on("keypress keyup blur",function (event) {
             $(this).val($(this).val().replace(/[^\d].+/, ""));
             if ((event.which < 48 || event.which > 57)) {
@@ -639,6 +642,180 @@
             if(email.length == 0) {
                 Result1.html('');
             }
+        });
+
+        $.validator.methods.smartCaptcha = function(value, element, param) {
+            return value == param;
+        };
+
+        $("#admin-form").validate({
+
+            /* @validation states + elements
+            ------------------------------------------- */
+
+            errorClass: "state-error",
+            validClass: "state-success",
+            errorElement: "em",
+
+            /* @validation rules
+            ------------------------------------------ */
+
+            rules: {
+                firstname: {
+                    required: true
+                },
+                lastname: {
+                    required: true
+                },
+                useremail: {
+                    required: true,
+                    email: true
+                },
+                website: {
+                    required: true,
+                    url: true
+                },
+                language: {
+                    required: true
+                },
+                upload1: {
+                    required: true,
+                    extension: "jpg|png|gif|jpeg|doc|docx|pdf|xls|rar|zip"
+                },
+                mobileos: {
+                    required: true
+                },
+                comment: {
+                    required: true,
+                    minlength: 30
+                },
+                mobile_phone: {
+                    require_from_group: [1, ".phone-group"]
+                },
+                home_phone: {
+                    require_from_group: [1, ".phone-group"]
+                },
+                password: {
+                    required: true,
+                    minlength: 6,
+                    maxlength: 16
+                },
+                repeatPassword: {
+                    required: true,
+                    minlength: 6,
+                    maxlength: 16,
+                    equalTo: '#password'
+                },
+                gender: {
+                    required: true
+                },
+                languages: {
+                    required: true
+                },
+                verification: {
+                    required: true,
+                    smartCaptcha: 19
+                },
+                applicant_age: {
+                    required: true,
+                    min: 16
+                },
+                licence_no: {
+                    required: function(element) {
+                        return $("#applicant_age").val() > 19;
+                    }
+                },
+                child_name: {
+                    required: "#parents:checked"
+                }
+
+            },
+
+            /* @validation error messages
+            ---------------------------------------------- */
+
+            messages: {
+                firstname: {
+                    required: 'Enter first name'
+                },
+                lastname: {
+                    required: 'Enter last name'
+                },
+                useremail: {
+                    required: 'Enter email address',
+                    email: 'Enter a VALID email address'
+                },
+                website: {
+                    required: 'Enter your website URL',
+                    url: 'URL should start with - http://www'
+                },
+                language: {
+                    required: 'Choose a language'
+                },
+                upload1: {
+                    required: 'Please browse a file',
+                    extension: 'File format not supported'
+                },
+                mobileos: {
+                    required: 'Please select a mobile platform'
+                },
+                comment: {
+                    required: 'Oops you forgot to comment',
+                    minlength: 'Enter at least 30 characters or more'
+                },
+                mobile_phone: {
+                    require_from_group: 'Fill at least a mobile contact'
+                },
+                home_phone: {
+                    require_from_group: 'Fill at least a home contact'
+                },
+                password: {
+                    required: 'Please enter a password'
+                },
+                repeatPassword: {
+                    required: 'Please repeat the above password',
+                    equalTo: 'Password mismatch detected'
+                },
+                gender: {
+                    required: 'Please choose specie'
+                },
+                languages: {
+                    required: 'Select laguages spoken'
+                },
+                verification: {
+                    required: 'Please enter verification code',
+                    smartCaptcha: 'Oops - enter a correct verification code'
+                },
+                applicant_age: {
+                    required: 'Enter applicant age',
+                    min: 'Must be 16 years and above'
+                },
+                licence_no: {
+                    required: 'Enter licence number'
+                },
+                child_name: {
+                    required: 'Please enter your childs name'
+                }
+
+            },
+
+            /* @validation highlighting + error placement
+            ---------------------------------------------------- */
+
+            highlight: function(element, errorClass, validClass) {
+                $(element).closest('.field').addClass(errorClass).removeClass(validClass);
+            },
+            unhighlight: function(element, errorClass, validClass) {
+                $(element).closest('.field').removeClass(errorClass).addClass(validClass);
+            },
+            errorPlacement: function(error, element) {
+                if (element.is(":radio") || element.is(":checkbox")) {
+                    element.closest('.option-group').after(error);
+                } else {
+                    error.insertAfter(element.parent());
+                }
+            }
+
         });
 
 
