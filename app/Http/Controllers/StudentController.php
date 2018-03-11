@@ -53,7 +53,8 @@ class StudentController extends Controller
 
         $student=new student();
         $student->student_name   = $request->input('student_name');
-        $student->father_name    = $request->input('student_name');
+        $student->father_name    = $request->input('father_name');
+        $student->mother_name    = $request->input('mother_name');
         $student->nationality    = $request->input('nationality');
         $student->mobile         = $request->input('mobile');
         $student->email          = $request->input('email');
@@ -69,10 +70,8 @@ class StudentController extends Controller
         $student->uni_id         = $request->input('uni_id');
         $student->uni_dept       = $request->input('uni_dept');
         $student->advisor        = $request->input('advisor');
-        //$student->student_photo  = $request->file('student_photo');
 
         $file = $request->file('student_photo');
-
         if($file != ""){
             $ext = $file->getClientOriginalExtension();
             $fileName = rand(10000, 50000) . '.' .$ext;
@@ -80,28 +79,9 @@ class StudentController extends Controller
             $image->resize(120, 120);
             $student->student_photo = '/uploads/' . $fileName;
             $image->save(base_path().'/public/uploads/'. $fileName);
-            //$path = public_path('uploads/' . $fileName);
-            //Image::make($file->getRealPath())->resize(120, 120)->save($path);
         }
-
-
-
-
-
-
-
-//        $imageName = time().'.'. $request->file('student_photo')->getClientOriginalExtension();
-//        $request->file('student_photo')->move(public_path('uploads'), $imageName);
-
-
-
-//        $image = $request->file('student_photo');
-//        $input['imagename'] = time().'.'.$image->getClientOriginalExtension();
-//        $destinationPath = public_path('/uploads');
-//        $image->move($destinationPath, $input['imagename']);
-
-        Student::create($request->all());
-
+        $student->save();
+//      Student::create($request->all());
         return redirect()->route('student.index')->with('success','New Student Record Inserted successfully.');
     }
 
