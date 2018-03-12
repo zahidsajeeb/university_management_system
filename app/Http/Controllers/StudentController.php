@@ -84,8 +84,14 @@ class StudentController extends Controller
 
     public function show($id)
     {
-        $data = Student::find($id);
-        return view('admin.student.show')->with('data', $data);
+        $data = DB::table('students')
+            ->where('students.id',$id)
+            ->join('departments', 'students.uni_dept', '=', 'departments.dept_id')
+            ->join('teachers', 'teachers.id', '=', 'students.advisor')
+            ->select('students.*', 'departments.dept_name','teachers.name')
+            ->get();
+//       $data = Student::find($id);
+       return view('admin.student.show')->with('datas',$data);
     }
 
 
@@ -103,6 +109,8 @@ class StudentController extends Controller
 
     public function destroy($id)
     {
-        //
+        $product->delete();
+        return redirect()->route('products.index')
+            ->with('success','Product deleted successfully');
     }
 }

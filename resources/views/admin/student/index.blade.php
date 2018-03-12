@@ -37,7 +37,7 @@
                                     <td>
                                         <a class="btn btn-info btn-xs" href="{{ route('student.show',$data->id) }}"><i class="fa fa-folder-open"></i></a>
                                         <a class="btn btn-system btn-xs" href="{{ route('student.edit',$data->id) }}"><i class="fa fa-edit"></i></a>
-                                        <a class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></a>
+                                        <a class="btn btn-danger btn-xs" href="{{ route('student.edit',$data->id) }}"><i class="fa fa-trash"></i></a>
                                     </td>
                                 </tr>
                                     @endforeach

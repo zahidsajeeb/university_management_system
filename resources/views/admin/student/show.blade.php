@@ -4,249 +4,112 @@
         <div class="tray tray-center">
             <div class="admin-form theme-primary mw1000 center-block" style="padding-bottom: 175px;">
                 <div class="panel heading-border">
+                    @foreach($datas as $data)
                     <form method="post" action="{{route('student.store')}}" id="admin-form" enctype="multipart/form-data">
-
                         <div class="panel-body bg-light">
                             <div class="section-divider mt20 mb40">
                                 <span> General Information </span>
                             </div>
                             <table class="table table-striped">
                                 <tr>
-                                    <td> Name:</td>
-                                    <td>{{$data->student_name}}</td>
+                                    <td><h3>Name:</h3> </td>
+                                    <td><h3>{{$data->student_name}}</h3></td>
+                                </tr>
+
+                                <tr>
+                                    <td> <h3>Father's Name:</h3></td>
+                                    <td><h3>{{$data->father_name}}</h3></td>
+                                    <td><h3>Father's Name:</h3> </td>
+                                    <td><h3>{{$data->mother_name}}</h3></td>
                                 </tr>
                                 <tr>
-                                    <td> Father's Name:</td>
-                                    <td>{{$data->father_name}}</td>
-                                    <td> Father's Name:</td>
-                                    <td>{{$data->father_name}}</td>
+                                    <td><h3>Nationality:</h3> </td>
+                                    <td><h3>{{$data->nationality}}</h3></td>
+                                    <td> <h3>Mobile Number:</h3></td>
+                                    <td><h3>{{$data->mobile}}</h3></td>
                                 </tr>
-
+                                <tr>
+                                    <td><h3>E-mail:</h3> </td>
+                                    <td><h3>{{$data->email}}</h3></td>
+                                    <td> <h3>Date Of Birth:</h3></td>
+                                    <td><h3>{{$data->dob}}</h3></td>
+                                </tr>
                             </table>
-                            <!-- .section-divider -->
-
-                            <div class="section row" id="spy1">
-                                <div class="col-md-12">
-                                    {{--<label for="firstname" class="field prepend-icon">--}}
-                                        {{--<input type="text" name="student_name" id="firstname" class="gui-input" placeholder="Student Name">--}}
-                                        {{--<label for="firstname" class="field-icon">--}}
-                                            {{--<i class="fa fa-user"></i>--}}
-                                        {{--</label>--}}
-                                    {{--</label>--}}
-                                </div>
-                            </div>
-
-                            <div class="section row" id="spy1">
-                                <div class="col-md-6">
-                                    <label for="firstname" class="field prepend-icon">
-                                        <input type="text" name="father_name" id="firstname" class="gui-input" placeholder="Father's Name">
-                                        <label for="firstname" class="field-icon">
-                                            <i class="fa fa-user"></i>
-                                        </label>
-                                    </label>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <label for="lastname" class="field prepend-icon">
-                                        <input type="text" name="mother_name" id="lastname" class="gui-input" placeholder="Mother's Name...">
-                                        <label for="lastname" class="field-icon">
-                                            <i class="fa fa-user"></i>
-                                        </label>
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div class="section row" id="spy1">
-                                <div class="col-md-4">
-                                    <label for="firstname" class="field prepend-icon">
-                                        <input type="text" name="nationality" id="firstname" class="gui-input" placeholder="Nationality">
-                                        <label for="firstname" class="field-icon">
-                                            <i class="fa fa-user"></i>
-                                        </label>
-                                    </label>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <label for="lastname" class="field prepend-icon">
-                                        <input type="text" name="mobile" id="username" class="gui-input" placeholder="Mobile Number">
-                                        <label for="lastname" class="field-icon">
-                                            <i class="fa fa-user"></i>
-                                        </label>
-                                        <td><div class="result" id="result"></div></td>
-                                    </label>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <label for="lastname" class="field prepend-icon">
-                                        <input type="text" name="email" id="email" class="gui-input" placeholder="E-mail">
-                                        <label for="lastname" class="field-icon">
-                                            <i class="fa fa-user"></i>
-                                        </label>
-                                        <td><div class="result" id="result1"></div></td>
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div class="section row" id="spy2">
-                                <div class="col-md-6">
-                                    <label for="file1" class="field file">
-                                        <span class="button btn-primary"> Choose File </span>
-                                        <input type="file" class="gui-file" name="student_photo" id="file1" onChange="document.getElementById('uploader1').value = this.value;">
-                                        <input type="text" class="gui-input" id="uploader1" placeholder="Select Student Image" readonly>
-                                    </label>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <label for="datepicker1" class="field prepend-icon">
-                                        <input type="text" id="datepicker1" name="dob" class="gui-input" placeholder="Date Of Birth">
-                                        <label class="field-icon">
-                                            <i class="fa fa-calendar-o"></i>
-                                        </label>
-                                    </label>
-                                </div>
+                        </div>
+                        <br>
 
 
-                            </div>
-
-                            <br>
-
+                        <div class="panel-body bg-light">
                             <div class="section-divider mt20 mb40">
-                                <span> Educational Information </span>
+                                <span> SSC Information </span>
                             </div>
+                            <table class="table table-striped">
+                                <tr>
+                                    <td> <h3>School Name:</h3> </td>
+                                    <td> <h3>{{$data->school_name}}</h3></td>
+                                </tr>
+                                <tr>
+                                    <td> <h3>SSC Department:</h3></td>
+                                    <td> <h3>{{$data->ssc_dept}}</h3></td>
+                                </tr>
+                                <tr>
+                                    <td> <h3>SSC GPA:</h3> </td>
+                                    <td> <h3>{{$data->ssc_gpa}}</h3></td>
+                                </tr>
+                                <tr>
+                                    <td> <h3>SSC Role:</h3> </td>
+                                    <td> <h3>{{$data->ssc_role}}</h3></td>
+                                </tr>
+                            </table>
+                        </div>
 
-                            <div class="section row" id="spy1">
-                                <div class="col-md-12">
-                                    <label for="firstname" class="field prepend-icon">
-                                        <input type="text" name="school_name" id="firstname" class="gui-input" placeholder="School Name">
-                                        <label for="firstname" class="field-icon">
-                                            <i class="fa fa-user"></i>
-                                        </label>
-                                    </label>
-                                </div>
+                        <div class="panel-body bg-light">
+                            <div class="section-divider mt20 mb40">
+                                <span> HSC Information </span>
                             </div>
+                            <table class="table table-striped">
+                                <tr>
+                                    <td> <h3>College Name:</h3> </td>
+                                    <td> <h3>{{$data->college_name}}</h3></td>
+                                </tr>
+                                <tr>
+                                    <td> <h3>HSC Department:</h3> </td>
+                                    <td> <h3>{{$data->hsc_dept}}</h3></td>
+                                </tr>
+                                <tr>
+                                    <td> <h3>HSC GPA:</h3></td>
+                                    <td> <h3>{{$data->hsc_gpa}}</h3></td>
+                                </tr>
+                                <tr>
+                                    <td> <h3>HSC Role:</h3></td>
+                                    <td> <h3>{{$data->hsc_role}}</h3></td>
+                                </tr>
+                            </table>
+                        </div>
 
-                            <div class="section row" id="spy1">
-                                <div class="col-md-4">
-                                    <label for="firstname" class="field select">
-                                        <select id="language" name="ssc_dept">
-                                            <option value="">Select Department...</option>
-                                            <option value="EN">Science</option>
-                                            <option value="FR">Arts</option>
-                                            <option value="SP">Commerce</option>
-                                        </select>
-                                        <i class="arrow double"></i>
-                                    </label>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <label for="lastname" class="field prepend-icon">
-                                        <input type="text" name="ssc_gpa" id="lastname" class="gui-input" placeholder="GPA">
-                                        <label for="lastname" class="field-icon">
-                                            <i class="fa fa-user"></i>
-                                        </label>
-                                    </label>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <label for="lastname" class="field prepend-icon">
-                                        <input type="text" name="ssc_role" id="lastname" class="gui-input" placeholder="Role No">
-                                        <label for="lastname" class="field-icon">
-                                            <i class="fa fa-user"></i>
-                                        </label>
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div class="section row" id="spy1">
-                                <div class="col-md-12">
-                                    <label for="firstname" class="field prepend-icon">
-                                        <input type="text" name="college_name" id="firstname" class="gui-input" placeholder="College Name">
-                                        <label for="firstname" class="field-icon">
-                                            <i class="fa fa-user"></i>
-                                        </label>
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div class="section row" id="spy1">
-                                <div class="col-md-4">
-                                    <label for="firstname" class="field select">
-                                        <select id="language" name="hsc_dept">
-                                            <option value="">Select Department...</option>
-                                            <option value="EN">Science</option>
-                                            <option value="FR">Arts</option>
-                                            <option value="SP">Commerce</option>
-                                        </select>
-                                        <i class="arrow double"></i>
-                                    </label>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <label for="lastname" class="field prepend-icon">
-                                        <input type="text" name="hsc_gpa" id="lastname" class="gui-input" placeholder="GPA">
-                                        <label for="lastname" class="field-icon">
-                                            <i class="fa fa-user"></i>
-                                        </label>
-                                    </label>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <label for="lastname" class="field prepend-icon">
-                                        <input type="text" name="hsc_role" id="lastname" class="gui-input" placeholder="Role No">
-                                        <label for="lastname" class="field-icon">
-                                            <i class="fa fa-user"></i>
-                                        </label>
-                                    </label>
-                                </div>
-                            </div>
-
-                            <br>
+                        <div class="panel-body bg-light">
                             <div class="section-divider mt20 mb40">
                                 <span> University Information </span>
                             </div>
-                            <div class="section row" id="spy1">
-                                <div class="col-md-4">
-                                    <label for="lastname" class="field prepend-icon">
-                                        <input type="text" name="uni_id" id="lastname" class="gui-input" placeholder="ID Number">
-                                        <label for="lastname" class="field-icon">
-                                            <i class="fa fa-user"></i>
-                                        </label>
-                                    </label>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <label for="firstname" class="field  select">
-                                        <select id="country" name="uni_dept">
-                                            <option value="">---Select Department---</option>
-                                            {{--@foreach($datas as $data)--}}
-                                                {{--<option value="{{ $data->dept_id }}">{{ $data->dept_name }}</option>--}}
-                                            {{--@endforeach--}}
-                                        </select>
-                                        <i class="arrow double"></i>
-                                    </label>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <label for="firstname" class="field select">
-                                        <select name="advisor" id="state">
-                                        </select>
-                                        <i class="arrow double"></i>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- end .form-body section -->
-                        <div class="panel-footer text-right">
-                            <button type="submit" class="button btn-primary"><i class="fa fa-check"></i> Submit </button>
-                            <button type="reset" class="button"> Cancel </button>
+                            <table class="table table-striped">
+                                <tr>
+                                    <td> <h3>University ID:</h3></td>
+                                    <td> <h3>{{$data->uni_id}}</h3></td>
+                                </tr>
+                                <tr>
+                                    <td> <h3>Department:</h3> </td>
+                                    <td> <h3>{{$data->dept_name}}</h3></td>
+                                </tr>
+                                <tr>
+                                    <td> <h3>Advisor:</h3> </td>
+                                    <td> <h3>{{$data->name}}</h3></td>
+                                </tr>
+                            </table>
                         </div>
                     </form>
-
+                @endforeach
                 </div>
-
             </div>
-            <!-- end: .admin-form -->
-
         </div>
     </section>
 @endsection
