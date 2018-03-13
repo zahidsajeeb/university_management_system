@@ -10,10 +10,15 @@
                             <div class="section-divider mt20 mb40">
                                 <span> General Information </span>
                             </div>
+                            <div>
+
+                            </div>
                             <table class="table table-striped">
                                 <tr>
                                     <td><h3>Name:</h3> </td>
                                     <td><h3>{{$data->student_name}}</h3></td>
+                                    <td><h3>Image:</h3></td>
+                                    <td><img  src="{{url($data->student_photo)}}"></td>
                                 </tr>
 
                                 <tr>

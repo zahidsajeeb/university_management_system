@@ -15,12 +15,23 @@
                         </div>
                     @endif
 
-                    <form method="post" action="{{route('student.store')}}" id="admin-form" enctype="multipart/form-data">
+                    <form method="post" action="{{ route('student.update',$data->id)}}" id="admin-form" enctype="multipart/form-data">
                         @csrf
+                        @method('PUT')
                         <div class="panel-body bg-light">
                             <div class="section-divider mt20 mb40">
                                 <span> General Information </span>
                             </div>
+
+                            <div style="text-align:center;">
+                                <img id="preview" src="{{url($data->student_photo)}}" height="200px" width="200px"/>
+                                <input type="file" id="image" name="student_photo" style="display:none;">
+                                <br/> <br>
+                                <a class="btn btn-info btn-xs" href="javascript:changeProfile();">Change</a> |
+                                <a class="btn btn-danger btn-xs" href="javascript:removeImage()">Remove</a>
+                                <input type="hidden" style="display: none" value="0" name="remove" id="remove">
+                            </div>
+                            <br>
                             <!-- .section-divider -->
 
                             <div class="section row" id="spy1">
@@ -37,7 +48,7 @@
                             <div class="section row" id="spy1">
                                 <div class="col-md-6">
                                     <label for="firstname" class="field prepend-icon">
-                                        <input type="text" name="father_name" id="firstname" class="gui-input" placeholder="Father's Name">
+                                        <input type="text" name="father_name" id="firstname" class="gui-input" value="{{$data->father_name}}">
                                         <label for="firstname" class="field-icon">
                                             <i class="fa fa-user"></i>
                                         </label>
@@ -46,7 +57,7 @@
 
                                 <div class="col-md-6">
                                     <label for="lastname" class="field prepend-icon">
-                                        <input type="text" name="mother_name" id="lastname" class="gui-input" placeholder="Mother's Name...">
+                                        <input type="text" name="mother_name" id="lastname" class="gui-input" value="{{$data->mother_name}}">
                                         <label for="lastname" class="field-icon">
                                             <i class="fa fa-user"></i>
                                         </label>
@@ -57,7 +68,7 @@
                             <div class="section row" id="spy1">
                                 <div class="col-md-4">
                                     <label for="firstname" class="field prepend-icon">
-                                        <input type="text" name="nationality" id="firstname" class="gui-input" placeholder="Nationality">
+                                        <input type="text" name="nationality" id="firstname" class="gui-input" value="{{$data->nationality}}" placeholder="nationality">
                                         <label for="firstname" class="field-icon">
                                             <i class="fa fa-user"></i>
                                         </label>
@@ -66,7 +77,7 @@
 
                                 <div class="col-md-4">
                                     <label for="lastname" class="field prepend-icon">
-                                        <input type="text" name="mobile" id="username" class="gui-input" placeholder="Mobile Number">
+                                        <input type="text" name="mobile" id="username" class="gui-input" value="{{$data->mobile}}" placeholder="Mobile Number">
                                         <label for="lastname" class="field-icon">
                                             <i class="fa fa-user"></i>
                                         </label>
@@ -76,7 +87,7 @@
 
                                 <div class="col-md-4">
                                     <label for="lastname" class="field prepend-icon">
-                                        <input type="text" name="email" id="email" class="gui-input" placeholder="E-mail">
+                                        <input type="text" name="email" id="email" class="gui-input" value="{{$data->email}}" placeholder="E-mail">
                                         <label for="lastname" class="field-icon">
                                             <i class="fa fa-user"></i>
                                         </label>
@@ -87,16 +98,16 @@
 
                             <div class="section row" id="spy2">
                                 <div class="col-md-6">
-                                    <label for="file1" class="field file">
-                                        <span class="button btn-primary"> Choose File </span>
-                                        <input type="file" class="gui-file" name="student_photo" id="file1" onChange="document.getElementById('uploader1').value = this.value;">
-                                        <input type="text" class="gui-input" id="uploader1" placeholder="Select Student Image" readonly>
-                                    </label>
+                                    {{--<label for="file1" class="field file">--}}
+                                    {{--<span class="button btn-primary"> Choose File </span>--}}
+                                    {{--<input type="file" class="gui-file" name="student_photo" id="file1" onChange="document.getElementById('uploader1').value = this.value;">--}}
+                                    {{--<input type="text" class="gui-input" id="uploader1" placeholder="Select Student Image" readonly>--}}
+                                    {{--</label>--}}
                                 </div>
 
                                 <div class="col-md-6">
                                     <label for="datepicker1" class="field prepend-icon">
-                                        <input type="text" id="datepicker1" name="dob" class="gui-input" placeholder="Date Of Birth">
+                                        <input type="text" id="datepicker1" name="dob" class="gui-input" value="{{$data->dob}}" placeholder="Date Of Birth">
                                         <label class="field-icon">
                                             <i class="fa fa-calendar-o"></i>
                                         </label>
@@ -115,7 +126,7 @@
                             <div class="section row" id="spy1">
                                 <div class="col-md-12">
                                     <label for="firstname" class="field prepend-icon">
-                                        <input type="text" name="school_name" id="firstname" class="gui-input" placeholder="School Name">
+                                        <input type="text" name="school_name" id="firstname" class="gui-input" value="{{$data->school_name}}" placeholder="School Name">
                                         <label for="firstname" class="field-icon">
                                             <i class="fa fa-user"></i>
                                         </label>
@@ -127,10 +138,10 @@
                                 <div class="col-md-4">
                                     <label for="firstname" class="field select">
                                         <select id="language" name="ssc_dept">
-                                            <option value="">Select Department...</option>
-                                            <option value="EN">Science</option>
-                                            <option value="FR">Arts</option>
-                                            <option value="SP">Commerce</option>
+                                            <option value="{{$data->ssc_dept}}">{{$data->ssc_dept}}</option>
+                                            <option value="Science">Science</option>
+                                            <option value="Arts">Arts</option>
+                                            <option value="Commerce">Commerce</option>
                                         </select>
                                         <i class="arrow double"></i>
                                     </label>
@@ -138,7 +149,7 @@
 
                                 <div class="col-md-4">
                                     <label for="lastname" class="field prepend-icon">
-                                        <input type="text" name="ssc_gpa" id="lastname" class="gui-input" placeholder="GPA">
+                                        <input type="text" name="ssc_gpa" id="lastname" class="gui-input" value="{{$data->ssc_gpa}}" placeholder="GPA">
                                         <label for="lastname" class="field-icon">
                                             <i class="fa fa-user"></i>
                                         </label>
@@ -147,7 +158,7 @@
 
                                 <div class="col-md-4">
                                     <label for="lastname" class="field prepend-icon">
-                                        <input type="text" name="ssc_role" id="lastname" class="gui-input" placeholder="Role No">
+                                        <input type="text" name="ssc_role" id="lastname" class="gui-input" value="{{$data->ssc_role}}" placeholder="Role No">
                                         <label for="lastname" class="field-icon">
                                             <i class="fa fa-user"></i>
                                         </label>
@@ -158,7 +169,7 @@
                             <div class="section row" id="spy1">
                                 <div class="col-md-12">
                                     <label for="firstname" class="field prepend-icon">
-                                        <input type="text" name="college_name" id="firstname" class="gui-input" placeholder="College Name">
+                                        <input type="text" name="college_name" id="firstname" class="gui-input" value="{{$data->college_name}}"  placeholder="College Name">
                                         <label for="firstname" class="field-icon">
                                             <i class="fa fa-user"></i>
                                         </label>
@@ -170,10 +181,10 @@
                                 <div class="col-md-4">
                                     <label for="firstname" class="field select">
                                         <select id="language" name="hsc_dept">
-                                            <option value="">Select Department...</option>
-                                            <option value="EN">Science</option>
-                                            <option value="FR">Arts</option>
-                                            <option value="SP">Commerce</option>
+                                            <option value="{{$data->hsc_dept}}">{{$data->hsc_dept}}</option>
+                                            <option value="Science">Science</option>
+                                            <option value="Arts">Arts</option>
+                                            <option value="Commerce">Commerce</option>
                                         </select>
                                         <i class="arrow double"></i>
                                     </label>
@@ -181,7 +192,7 @@
 
                                 <div class="col-md-4">
                                     <label for="lastname" class="field prepend-icon">
-                                        <input type="text" name="hsc_gpa" id="lastname" class="gui-input" placeholder="GPA">
+                                        <input type="text" name="hsc_gpa" id="lastname" class="gui-input" value="{{$data->hsc_gpa}}" placeholder="GPA">
                                         <label for="lastname" class="field-icon">
                                             <i class="fa fa-user"></i>
                                         </label>
@@ -190,48 +201,14 @@
 
                                 <div class="col-md-4">
                                     <label for="lastname" class="field prepend-icon">
-                                        <input type="text" name="hsc_role" id="lastname" class="gui-input" placeholder="Role No">
+                                        <input type="text" name="hsc_role" id="lastname" class="gui-input" value="{{$data->hsc_role}}" placeholder="Role No">
                                         <label for="lastname" class="field-icon">
                                             <i class="fa fa-user"></i>
                                         </label>
                                     </label>
                                 </div>
                             </div>
-
                             <br>
-                            <div class="section-divider mt20 mb40">
-                                <span> University Information </span>
-                            </div>
-                            <div class="section row" id="spy1">
-                                <div class="col-md-4">
-                                    <label for="lastname" class="field prepend-icon">
-                                        <input type="text" name="uni_id" id="lastname" class="gui-input" placeholder="ID Number">
-                                        <label for="lastname" class="field-icon">
-                                            <i class="fa fa-user"></i>
-                                        </label>
-                                    </label>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <label for="firstname" class="field  select">
-                                        <select id="country" name="uni_dept">
-                                            <option value="">---Select Department---</option>
-                                            {{--@foreach($datas as $data)--}}
-                                                {{--<option value="{{ $data->dept_id }}">{{ $data->dept_name }}</option>--}}
-                                            {{--@endforeach--}}
-                                        </select>
-                                        <i class="arrow double"></i>
-                                    </label>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <label for="firstname" class="field select">
-                                        <select name="advisor" id="state">
-                                        </select>
-                                        <i class="arrow double"></i>
-                                    </label>
-                                </div>
-                            </div>
                         </div>
                         <!-- end .form-body section -->
                         <div class="panel-footer text-right">
@@ -247,4 +224,33 @@
 
         </div>
     </section>
+@endsection
+@section('js')
+    <script>
+        function changeProfile() {
+            $('#image').click();
+        }
+        $('#image').change(function () {
+            var imgPath = $(this)[0].value;
+            var ext = imgPath.substring(imgPath.lastIndexOf('.') + 1).toLowerCase();
+            if (ext == "gif" || ext == "png" || ext == "jpg" || ext == "jpeg")
+                readURL(this);
+            else
+                alert("Please select image file (jpg, jpeg, png).")
+        });
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.readAsDataURL(input.files[0]);
+                reader.onload = function (e) {
+                    $('#preview').attr('src', e.target.result);
+                    $('#remove').val(0);
+                }
+            }
+        }
+        function removeImage() {
+            $('#preview').attr('src', '{{url('images/noimage.jpg')}}');
+            $('#remove').val(1);
+        }
+    </script>
 @endsection

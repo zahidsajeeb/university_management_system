@@ -380,6 +380,8 @@
 <script src="{{url('assets/admin-tools/admin-forms/js/jquery.validate.min.js')}}"></script>
 <script src="{{url('assets/admin-tools/admin-forms/js/additional-methods.min.js')}}"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+
 <script src="{{url('vendor/plugins/datatables/media/js/jquery.dataTables.js')}}"></script>
 
 <!-- Datatables Tabletools addon -->
@@ -824,6 +826,7 @@
 
     });
 </script>
+@yield('js')
 
 <!-- END: PAGE SCRIPTS -->
 

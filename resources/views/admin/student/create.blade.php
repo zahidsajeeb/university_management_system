@@ -128,9 +128,9 @@
                                     <label for="firstname" class="field select">
                                         <select id="language" name="ssc_dept">
                                             <option value="">Select Department...</option>
-                                            <option value="EN">Science</option>
-                                            <option value="FR">Arts</option>
-                                            <option value="SP">Commerce</option>
+                                            <option value="Science">Science</option>
+                                            <option value="Arts">Arts</option>
+                                            <option value="Commerce">Commerce</option>
                                         </select>
                                         <i class="arrow double"></i>
                                     </label>
@@ -171,9 +171,9 @@
                                     <label for="firstname" class="field select">
                                         <select id="language" name="hsc_dept">
                                             <option value="">Select Department...</option>
-                                            <option value="EN">Science</option>
-                                            <option value="FR">Arts</option>
-                                            <option value="SP">Commerce</option>
+                                            <option value="Science">Science</option>
+                                            <option value="Arts">Arts</option>
+                                            <option value="Commerce">Commerce</option>
                                         </select>
                                         <i class="arrow double"></i>
                                     </label>
