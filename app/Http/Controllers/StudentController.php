@@ -1,6 +1,8 @@
 <?php
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Input;
 use Validator;
 use Image;
 use App\Department;
@@ -113,7 +115,7 @@ class StudentController extends Controller
             'mobile'         => 'required|max:11',
             'email'          => 'required|max:50',
             'dob'            => 'required',
-            'student_photo'  => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'student_photo'  => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'school_name'    => 'required|max:100',
             'ssc_dept'       => 'required',
             'ssc_role'       => 'required',
@@ -141,7 +143,13 @@ class StudentController extends Controller
         $student->hsc_gpa        = $request->input('hsc_gpa');
 
         $file = $request->file('student_photo');
-        if($file != ""){
+
+
+        if (Input::hasFile('student_photo')) {
+            $usersImage = public_path("{$student->student_photo}");// get previous image from folder
+            if (File::exists($usersImage)) { // unlink or remove previous image from folder
+                unlink($usersImage);
+            }
             $ext = $file->getClientOriginalExtension();
             $fileName = rand(10000, 50000) . '.' .$ext;
             $image = Image::make($request->file('student_photo'));
@@ -150,7 +158,7 @@ class StudentController extends Controller
             $image->save(base_path().'/public/uploads/'. $fileName);
         }
         $student->update();
-//        return redirect()->route('student.index')->with('success','Record Updated successfully.');
+        return redirect()->route('student.index')->with('success','Record Updated successfully.');
     }
 
 
