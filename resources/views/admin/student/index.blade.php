@@ -35,9 +35,13 @@
                                     <td>{{$data->email}}</td>
                                     <td>{{$data->dept_name}}</td>
                                     <td>
-                                        <a class="btn btn-info btn-xs" href="{{ route('student.show',$data->id) }}"><i class="fa fa-folder-open"></i></a>
+                                        <a class="btn btn-info btn-xs"   href="{{ route('student.show',$data->id) }}"><i class="fa fa-folder-open"></i></a>
                                         <a class="btn btn-system btn-xs" href="{{ route('student.edit',$data->id) }}"><i class="fa fa-edit"></i></a>
-                                        <a class="btn btn-danger btn-xs" href="{{ route('student.edit',$data->id) }}"><i class="fa fa-trash"></i></a>
+                                        <form action="{{action('StudentController@destroy', $data->id)}}" method="post" class="delete" style="display:inline;">
+                                            {{csrf_field()}}
+                                            <input name="_method" type="hidden" value="DELETE">
+                                            <button class="btn btn-danger btn-xs" type="submit"><i class="fa fa-trash"></i></button>
+                                        </form>
                                     </td>
                                 </tr>
                                     @endforeach
@@ -49,6 +53,11 @@
             </div>
         </div>
     </section>
-
-
+@endsection
+@section('js')
+    <script>
+        $(".delete").on("submit", function(){
+            return confirm("Do you want to delete this Record?");
+        });
+    </script>
 @endsection

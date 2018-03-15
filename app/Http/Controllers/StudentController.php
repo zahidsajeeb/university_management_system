@@ -166,8 +166,12 @@ class StudentController extends Controller
 
     public function destroy($id)
     {
-        $product->delete();
-        return redirect()->route('products.index')
-            ->with('success','Product deleted successfully');
+//        Student::destroy($id);
+//        return redirect()->route('studnet.index')->with('success','Student Information deleted successfully');
+
+        $ticket = Student::find($id);
+        $ticket->delete();
+
+        return redirect()->route('student.index')->with('success','Student Information deleted successfully');
     }
 }
