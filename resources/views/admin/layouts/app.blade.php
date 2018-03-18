@@ -6,6 +6,7 @@
     <title>AdminDesigns - A Responsive HTML5 Admin UI Framework</title>
     <meta name="keywords" content="HTML5 Bootstrap 3 Admin Template UI Theme" />
     <meta name="description" content="AdminDesigns - A Responsive HTML5 Admin UI Framework">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="author" content="AdminDesigns">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -516,27 +517,27 @@
             }
         }
 
-        $('#datatable2').dataTable({
-            "aoColumnDefs": [{
-                'bSortable': false,
-                'aTargets': [-1]
-            }],
-            "oLanguage": {
-                "oPaginate": {
-                    "sPrevious": "",
-                    "sNext": ""
-                }
-            },
-            "iDisplayLength": 5,
-            "aLengthMenu": [
-                [5, 10, 25, 50, -1],
-                [5, 10, 25, 50, "All"]
-            ],
-            "sDom": '<"dt-panelmenu clearfix"lfr>t<"dt-panelfooter clearfix"ip>',
-            "oTableTools": {
-                "sSwfPath": "vendor/plugins/datatables/extensions/TableTools/swf/copy_csv_xls_pdf.swf"
-            }
-        });
+//        $('#datatable2').dataTable({
+//            "aoColumnDefs": [{
+//                'bSortable': false,
+//                'aTargets': [-1]
+//            }],
+//            "oLanguage": {
+//                "oPaginate": {
+//                    "sPrevious": "",
+//                    "sNext": ""
+//                }
+//            },
+//            "iDisplayLength": 5,
+//            "aLengthMenu": [
+//                [5, 10, 25, 50, -1],
+//                [5, 10, 25, 50, "All"]
+//            ],
+//            "sDom": '<"dt-panelmenu clearfix"lfr>t<"dt-panelfooter clearfix"ip>',
+//            "oTableTools": {
+//                "sSwfPath": "vendor/plugins/datatables/extensions/TableTools/swf/copy_csv_xls_pdf.swf"
+//            }
+//        });
 
         $("#datepicker1").datepicker({
             prevText: '<i class="fa fa-chevron-left"></i>',

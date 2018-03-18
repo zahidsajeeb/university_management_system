@@ -31,3 +31,8 @@ Route::get('api/get-mobile','AjaxController@getMobileNumber');
 
 Route::get('api/get-email','AjaxController@getEmail');
 
+// ----------------------------- Course Route -----------------------------------------------------
+Route::get('api/course', 'CourseController@apiCourse')->name('api.course');
+Route::resource('course', 'CourseController');
+
+

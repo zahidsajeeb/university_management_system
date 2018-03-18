@@ -144,7 +144,6 @@ class StudentController extends Controller
 
         $file = $request->file('student_photo');
 
-
         if (Input::hasFile('student_photo')) {
             $usersImage = public_path("{$student->student_photo}");// get previous image from folder
             if (File::exists($usersImage)) { // unlink or remove previous image from folder

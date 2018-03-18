@@ -63,7 +63,7 @@
                 </a>
                 <ul class="nav sub-nav">
                     <li>
-                        <a  href="{{route('student.index')}}"><span class="fa fa-check"></span>Information</a>
+                        <a  href="{{route('course.index')}}"><span class="fa fa-check"></span>Information</a>
                     </li>
                 </ul>
             </li>
